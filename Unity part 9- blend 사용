@@ -1,0 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Test3 : MonoBehaviour
+{
+    private Animator anim;
+  [SerializeField] private float movespeed;
+    private bool isMove;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+        anim = GetComponent<Animator>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float _dirX = Input.GetAxisRaw("Horizontal");//a,d리턴
+        float _dirZ = Input.GetAxisRaw("Vertical");//sd, 리턴해서 주는거임.
+        Vector3 direction = new Vector3(_dirX, 0, _dirZ);// 나온값을  백터3 선언해 넣어준다.
+        isMove = false;
+
+
+        if (direction != Vector3.zero)
+        {
+            isMove = true;
+        }
+        this.transform.Translate(direction.normalized*movespeed*Time.deltaTime);//대각선 2배 이동 방지 총합을 1로만든다
+
+        anim.SetBool("Move", isMove);
+        anim.SetFloat("DirX", direction.x);
+        anim.SetFloat("DirZ", direction.z); // 그래서 위 다이랙션 값이 DIr X,Dir z 파라미터로 
+        //전달되어서 내가 누른만큼 x,y 동시조정이 되기때문에, 좀전에 만든것을 효율적구현가능하다
+    }
+}
