@@ -1,0 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Test : MonoBehaviour
+{
+    
+        void Update()
+        {
+            if (Input.GetKey(KeyCode.W))
+        {
+
+
+            this.transform.Rotate(new Vector3(90, 0, 0) * Time.deltaTime);
+
+
+
+        }
+    }
+}
