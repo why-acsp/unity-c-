@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Test : MonoBehaviour
+{
+    // Update is called once per frame
+
+        Vector3 rotation;
+        void Start()
+        {
+            rotation = this.transform.eulerAngles;
+
+        }
+        void Update()
+        {
+            if (Input.GetKey(KeyCode.W))
+        {
+            rotation=rotation+ new Vector3(90, 0, 0) * Time.deltaTime;
+            this.transform.eulerAngles = rotation;
+            Debug.Log(transform.eulerAngles);
+
+
+
+        }
+    }
+}
