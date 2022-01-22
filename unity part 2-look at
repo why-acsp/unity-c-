@@ -1,0 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Test : MonoBehaviour {
+    [SerializeField]
+    private GameObject go_camera;
+    
+    
+        void Update()
+        {
+            if (Input.GetKey(KeyCode.W))
+        {
+
+            this.transform.LookAt(go_camera.transform.position);
+            }
+                
+
+
+        }
+    }
+
