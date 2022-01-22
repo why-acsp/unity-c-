@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Test : MonoBehaviour {
+
+    Vector3 rotation;
+
+    
+        void Update()
+        {
+            if (Input.GetKey(KeyCode.W))
+        {
+
+          // movespeed *this.transform.forward * Time.deltaTime
+                // 정규화 벡터 방향만을 알려준다. new vector3 (0.0,1) z축.무비스피드가 몇이냐에 따라서
+               // 얼마만큼 가는지도 정해짐
+           //   this.transform.up //야는 y축 방향
+            //  this.transform.right// 야는 x축방향. 
+
+            }
+                
+
+
+        }
+    }
+
