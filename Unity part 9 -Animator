@@ -1,0 +1,43 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Test3 : MonoBehaviour
+{
+    private Animator anim;
+  [SerializeField] private float movespeed;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+        anim = GetComponent<Animator>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float _dirX = Input.GetAxisRaw("Horizontal");//a,d리턴
+        float _dirZ = Input.GetAxisRaw("Vertical");//sd, 리턴해서 주는거임.
+        Vector3 direction = new Vector3(_dirX, 0, _dirZ);// 나온값을  백터3 선언해 넣어준다.
+        anim.SetBool("Right", false);
+        anim.SetBool("Left", false);
+        anim.SetBool("Up", false);
+        anim.SetBool("Down", false);
+
+
+
+        if (direction != Vector3.zero) ;
+        this.transform.Translate(direction.normalized*movespeed*Time.deltaTime);//대각선 2배 이동 방지 총합을 1로만든다
+        if (direction.x > 0)
+            anim.SetBool("Right", true);
+        else if (direction.x < 0)
+            anim.SetBool("Left", true);
+        else if (direction.z > 0)
+            anim.SetBool("Up", true);
+        else if (direction.z < 0)
+            anim.SetBool("Down", true);
+
+
+    }
+}
