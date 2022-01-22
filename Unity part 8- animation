@@ -24,6 +24,7 @@ public class Test1 : MonoBehaviour
             anim.IsPlaying("Cube2");
             if (!anim.IsPlaying("Cube2")) ;
             anim.Play("Cube2");
+            anim.Stop("Cube_1");
         }
     }
 }
