@@ -1,0 +1,16 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Test : MonoBehaviour {
+    [SerializeField]
+    private GameObject go_camera;
+
+
+    void Update()
+    {
+        transform.RotateAround(go_camera.transform.position, Vector3.up, 100 * Time.deltaTime); ;//큐브가 카메라 주위를 위에서 
+        //100정도로 공전한다고보면될듯/
+    }
+}
+
