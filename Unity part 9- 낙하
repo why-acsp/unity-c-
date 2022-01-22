@@ -1,0 +1,85 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Test3 : MonoBehaviour
+{
+    private Animator anim;
+    private Rigidbody rigid;
+    private BoxCollider col;
+    [SerializeField] private float movespeed;
+    [SerializeField] private float jumpForce;
+    [SerializeField] private LayerMask LayerMask;
+    private bool isMove;
+    private bool isJump;
+    private bool isfall;
+    // Start is called before the first frame update
+    void Start()
+    {
+
+        anim = GetComponent<Animator>();
+        rigid = GetComponent<Rigidbody>();
+        col = GetComponent<BoxCollider>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        TryWalk();
+
+        TryJump();
+
+    }
+
+
+
+    private void TryJump()
+    {
+        if (isJump)
+        {
+            if (rigid.velocity.y <= -0.1 && !isfall)
+            {
+                isfall = true;
+                anim.SetTrigger("Fall");
+            }
+            RaycastHit hitinfo;
+            if (Physics.Raycast(transform.position, -transform.up, out hitinfo, col.bounds.extents.y + 0.1f, LayerMask))//자기위치에서(transtion.position)아래방향으로(-up)레이저를쏘아 충돌된 객체를 저장한다. 박스의 y값 1/2+0.1만큼쏜다., 특정레이어 바닥만 가능하게. 그게 히트인포에 저장된다. d익스텐츠는 박스컬라이더의 절반.그래야 바닥에 맞닿음.
+            {
+                anim.SetTrigger("Land");
+                isJump = false;
+                isfall = false;
+            }
+            if (Input.GetKeyDown(KeyCode.Space) && !isJump)
+            {
+                isJump = true;
+                rigid.AddForce(Vector3.up * jumpForce);
+                anim.SetTrigger("Jump");
+            }
+
+        }
+    }
+
+
+
+        private void TryWalk()
+    {
+            {
+                float _dirX = Input.GetAxisRaw("Horizontal");//a,d리턴
+                float _dirZ = Input.GetAxisRaw("Vertical");//sd, 리턴해서 주는거임.
+                Vector3 direction = new Vector3(_dirX, 0, _dirZ);// 나온값을  백터3 선언해 넣어준다.
+                isMove = false;
+
+
+                if (direction != Vector3.zero)
+                {
+                    isMove = true;
+                }
+                this.transform.Translate(direction.normalized * movespeed * Time.deltaTime);//대각선 2배 이동 방지 총합을 1로만든다
+
+                anim.SetBool("Move", isMove);
+                anim.SetFloat("DirX", direction.x);
+                anim.SetFloat("DirZ", direction.z);
+            }// 그래서 위 다이랙션 값이 DIr X,Dir z 파라미터로 
+                                                //전달되어서 내가 누른만큼 x,y 동시조정이 되기때문에, 좀전에 만든것을 효율적구현가능하다
+        }
+    }
