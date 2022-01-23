@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Test4 : MonoBehaviour
+{
+    ParticleSystem ps;      //뭘 가져올려면 가져올 그릇을 만드는게 변수 그리고 쉽게 사용하고자 
+    //가져올것의 약자로서 변수를 정해두면 알아보기좋다.
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        ps.Play();     // 이 메소드를활용해서 입자를 시작할수있다.
+        ps.Stop        // 이 메소드를 할용해서 입자를 멈출수있다.
+        ps.Pause    // 이 메소드를 활용해서 입자를 정지시킬수있다.(그럼 정지상태로 나중에 다시 재생가능)
+
+        ps.Emit(1); // 이 메소드를 활용해서 입자를 괄호안의수만큼 발생시킬수있다.(바스트)
+
+    }
+}
